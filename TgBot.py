@@ -112,7 +112,7 @@ def SendAllUsersChange(tmpUser, positionToIns, text):
                 roe = str("{:.2f}".format(positionToIns.roe)) + '% ❌'
             for bet in BettingPositions:
                 if(bet.userId == tmpUser.id and positionToIns.symbol == bet.symbol):
-                    bot.reply_to( bet.msgid,name + '\n' +"Change " +text+": " + tmpUser.name +'\nTime: ' + date + '\n\n' +"Symbol : " + positionToIns.symbol + '\n' +"Amount : " + str(positionToIns.amount) + '\n' + 'Type: ' + positionToIns.term + '\n' + 'Open price: ' + str(positionToIns.entryPrice) + '\Mark price: ' + str(positionToIns.markPrice) + '\nPnL: ' + pnl + '\nRoe: ' + roe+ '\nLeverage : ' + str(positionToIns.leverage))
+                    bot.reply_to( bet.msgid,name + '\n' +"Change " +text+": " + tmpUser.name +'\nTime: ' + date + '\n\n' +"Symbol : " + positionToIns.symbol + '\n' +"Amount : " + str(positionToIns.amount) + '\n' + 'Type: ' + positionToIns.term + '\n' + 'Open price: ' + str(positionToIns.entryPrice) + '\nMark price: ' + str(positionToIns.markPrice) + '\nPnL: ' + pnl + '\nRoe: ' + roe+ '\nLeverage : ' + str(positionToIns.leverage))
                     break
     except Exception as e:
         print ("Failed : {0}\n".format(str(e)))
