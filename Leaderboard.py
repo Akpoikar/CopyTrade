@@ -66,22 +66,20 @@ try:
         symbol = data["symbol"]
         entryPrice = data["entryPrice"]
         markPrice = data["markPrice"]
-        pnl = float("{:.2f}".format(data["pnl"]))
-        roe = float("{:.4f}".format(data["roe"]))*100
+        pnl = data["pnl"]
+        roe = data["roe"]*100
         updateTime = data["updateTimeStamp"]
         leverage = data["leverage"]
         amount = data["amount"]
         positionTerm = ""
-        if pnl == 0 or roe == 0 or entryPrice == markPrice:
-            return None
-        if (entryPrice < markPrice and pnl > 0) or (entryPrice > markPrice and pnl < 0):
+        if amount > 0:
                 positionTerm = "LONG🟢"
-        elif(entryPrice > markPrice and pnl > 0) or (entryPrice < markPrice and pnl < 0):
+        elif amount < 0:
                 positionTerm = "SHORT🔴"
         else:
             print("WHY")
         positionToIns = Position(symbol,entryPrice,markPrice,float(pnl),float(roe),updateTime, positionTerm,leverage,amount)
-        return positionToIns       
+        return positionToIns         
 
     def GetAbsPosition(data):
         symbol = data["symbol"]
@@ -164,8 +162,8 @@ try:
                     for position in tmpUser.Positions:
                         if positionToIns == position:
                             position.markPrice = data["markPrice"]
-                            position.pnl = float("{:.2f}".format(data["pnl"]))
-                            position.roe = float("{:.4f}".format(data["roe"]))*100
+                            position.pnl = data["pnl"]
+                            position.roe = data["roe"]*100
                             if(position.amount != data["amount"]):
                                 try:
                                     BinanceHelper.UpdateOrder(position ,flag,data["amount"] - position.amount)
